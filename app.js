@@ -7,11 +7,12 @@ const API_URL = "https://vscode-relaxed-whale-wd.cfapps.us10-001.hana.ondemand.c
 // CORS Proxy Configuration
 // Required because backend API does not support CORS
 const USE_CORS_PROXY = true;
-const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
+const CORS_PROXY = "https://thingproxy.freeboard.io/fetch/";
 
 // Alternative CORS proxies (if one fails, try switching):
 // const CORS_PROXY = "https://corsproxy.io/?";
 // const CORS_PROXY = "https://api.allorigins.win/raw?url="; // GET only, doesn't support POST
+// const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest="; // Preflight redirect issues
 
 const FINAL_API_URL = USE_CORS_PROXY ? CORS_PROXY + encodeURIComponent(API_URL) : API_URL;
 
