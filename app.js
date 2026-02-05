@@ -397,10 +397,6 @@ async function handleSendMessage() {
 }
 
 async function callApi(question) {
-    console.log('Calling API with question:', question);
-    console.log('Final API URL:', FINAL_API_URL);
-    
-    try {
     try {
         const response = await fetch(FINAL_API_URL, {
             method: 'POST',
@@ -460,6 +456,10 @@ async function callApi(question) {
         if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
             throw new Error('Network error: Unable to reach the API. Please check your connection.');
         }
+        throw error;
+    }
+}
+
 function handleRetry() {
     if (state.lastUserMessage && !state.isRequestInProgress) {
         elements.messageInput.value = state.lastUserMessage;
