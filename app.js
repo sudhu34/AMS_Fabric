@@ -2,19 +2,9 @@
 // Configuration
 // ========================
 
-const API_URL = "https://vscode-relaxed-whale-wd.cfapps.us10-001.hana.ondemand.com/submit";
-
-// CORS Proxy Configuration
-// Required because backend API does not support CORS
-const USE_CORS_PROXY = true;
-const CORS_PROXY = "https://thingproxy.freeboard.io/fetch/";
-
-// Alternative CORS proxies (if one fails, try switching):
-// const CORS_PROXY = "https://corsproxy.io/?";
-// const CORS_PROXY = "https://api.allorigins.win/raw?url="; // GET only, doesn't support POST
-// const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest="; // Preflight redirect issues
-
-const FINAL_API_URL = USE_CORS_PROXY ? CORS_PROXY + encodeURIComponent(API_URL) : API_URL;
+// Using Cloudflare Worker for CORS handling
+// Your custom worker handles the API call and adds CORS headers
+const API_URL = "https://ams-fabric-proxy.sudhakarn-in.workers.dev";
 
 // ========================
 // State Management
@@ -399,7 +389,7 @@ async function handleSendMessage() {
 
 async function callApi(question) {
     try {
-        const response = await fetch(FINAL_API_URL, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             mode: 'cors',
             headers: {
